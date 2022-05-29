@@ -6,7 +6,6 @@ GPSから取得した各情報をLCDディスプレイに表示することが�
 [arduinoと各モジュールの接続]
 
 1.LCDディスプレイ->arduino  
-
   VSS->GND  
   VDD->5V  
   V0 ->GND  
@@ -20,10 +19,11 @@ GPSから取得した各情報をLCDディスプレイに表示することが�
   A  ->5V  
        明るさ調整用にGNDとの間に10kΩの可変抵抗を間に挟んでいます。  
   K  ->GND  
-2.GPSモジュール->arduino
 
+2.GPSモジュール->arduino
   TX->No.10  
   RX->No.11  
+
 3.スピーカー
 
   No.12、GND    
