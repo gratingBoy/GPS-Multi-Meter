@@ -15,7 +15,7 @@ void setup()
     lcd.setCursor(0, 0);          // LCD カーソル移動 (1行目)
     lcd.print("GPS Multi Meter"); // 初期表示 1
     lcd.setCursor(0, 1);          // LCD カーソル移動 (2行目)
-    lcd.print("Version 0.1");     // 初期表示 2
+    lcd.print("Version 0.2");     // 初期表示 2
     play98();                     // 起動音再生
     delay(INIT_WAIT);             // 待ち
     lcd.clear();
@@ -41,10 +41,20 @@ void loop()
     {
         if (gps.satellites.value() >= MINIMUM_SAT) // 3次元計測が可能なら
         {
-            sprintf(str, "%02d:%02d ALT:%5dm",   // 時刻と標高表示
-                    gps.time.hour() + 9,         // GPSから時を取得(GMT->JST変換)
-                    gps.time.minute(),           // GPSから分を取得
-                    (int)gps.altitude.meters()); // GPSから標高を取得
+            if ((gps.time.hour() + 9) > 23) // 時差補正時に24時以上になるか
+            {
+                sprintf(str, "%02d:%02d ALT:%5dm",   // 時刻と標高表示
+                        gps.time.hour() + 9 - 24,    // GPSから時を取得(GMT->JST変換)
+                        gps.time.minute(),           // GPSから分を取得
+                        (int)gps.altitude.meters()); // GPSから標高を取得
+            }
+            else
+            {
+                sprintf(str, "%02d:%02d ALT:%5dm",   // 時刻と標高表示
+                        gps.time.hour() + 9,         // GPSから時を取得(GMT->JST変換)
+                        gps.time.minute(),           // GPSから分を取得
+                        (int)gps.altitude.meters()); // GPSから標高を取得
+            }
         }
         else // 3次元計測不可能なら
         {
