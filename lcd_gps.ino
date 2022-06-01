@@ -13,7 +13,7 @@ void setup()
     play98();                     // 起動音再生
     lcd.begin(MAX_ROW, MAX_COL);  // LCD通信開始
     lcd.clear();                  // LCD画面クリア
-    gpsSerial.begin(115200);      // GPS通信開始
+    gpsSerial.begin(9600);      // GPS通信開始
     lcd.setCursor(0, 0);          // LCD カーソル移動 (1行目)
     lcd.print("GPS Multi Meter"); // 初期表示 1
     lcd.setCursor(0, 1);          // LCD カーソル移動 (2行目)
