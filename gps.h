@@ -29,6 +29,7 @@
 #define OFF 0                  // フラグOFF
 #define RECEIVE_TONE_HIGT 1500 //電文受診時ビープ 低音
 #define RECEIVE_TONE_LOW 2000  //電文受診時ビープ 高音
+#define MAIN_DELAY 200         //メインループ待ち時間
 
 //********** prototype **********
 static void play98();
