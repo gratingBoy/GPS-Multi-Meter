@@ -13,7 +13,7 @@ void setup()
     play98();                     // 起動音再生
     lcd.begin(MAX_ROW, MAX_COL);  // LCD通信開始
     lcd.clear();                  // LCD画面クリア
-    gpsSerial.begin(9600);        // GPS通信開始
+    gpsSerial.begin(115200);      // GPS通信開始
     lcd.setCursor(0, 0);          // LCD カーソル移動 (1行目)
     lcd.print("GPS Multi Meter"); // 初期表示 1
     lcd.setCursor(0, 1);          // LCD カーソル移動 (2行目)
@@ -69,9 +69,9 @@ void loop()
         }
         else // 3次元計測不可能なら
         {
-            sprintf(str, "%02d:%02d ALT:-----m", // 時刻と標高表示(標高に無効表示)
-                    gps.time.hour() + 9,         // GPSから時を取得(GMT->JST変換)
-                    gps.time.minute());          // GPSから分を取得
+            sprintf(str, "%02d:%02d ALT:-----m",  // 時刻と標高表示(標高に無効表示)
+                    gps.time.hour() + JST_OFFSET, // GPSから時を取得(GMT->JST変換)
+                    gps.time.minute());           // GPSから分を取得
         }
 
         lcd.setCursor(0, 0);            // カーソルを始点へ移動(1行目)
@@ -89,6 +89,7 @@ void loop()
         lcd.print("Just a moment..."); // 2行目メッセージ表示
         playFlag = OFF;                // 受信時ビープ 再生フラグ OFF
     }
+    delay(MAIN_DELAY);
 }
 
 //********** 起動音再生 **********
